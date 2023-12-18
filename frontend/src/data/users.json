@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Jane Doe",
+    "email": "paa@gmail.com",
+    "password": "pass1",
+    "isAdmin": true
+  },
+  {
+    "name": "John Doe",
+    "email": "johnd@gmail.com",
+    "password": "pass1",
+    "isAdmin": false
+  },
+  {
+    "name": "web atlas Doe",
+    "email": "webatlas@gmail.com",
+    "password": "pass1",
+    "isAdmin": false
+  },
+  {
+    "name": "Atlas web",
+    "email": "atlasweb@gmail.com",
+    "password": "pass1",
+    "isAdmin": false
+  }
+]
