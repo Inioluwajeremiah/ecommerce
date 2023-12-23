@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import SearchBox from "./SearchBox";
+import { resetCart } from "../slices/cartSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const Header = () => {
     try {
       await logoutApiCall().unwrap();
       dispatch(logout());
+      dispatch(resetCart());
       navigate("/");
     } catch (error) {
       toast.error(error?.data?.message || error.error);
@@ -39,8 +41,8 @@ const Header = () => {
   };
 
   return (
-    <header className="mb-20 ">
-      <nav className="fixed top-0 bg-white w-full h-16 flex flex-row justify-between items-center px-8 py-2 shadow">
+    <header className="fixed w-full h-16 px-8 py-2  mb-20 top-0 z-50 shadow bg-white">
+      <nav className="flex flex-row justify-between items-center  ">
         <div>
           <h1 className="font-bold text-2xl ">
             <Link to={"/"}>IJ Store</Link>
@@ -76,19 +78,19 @@ const Header = () => {
 
           {/* admin protected routes */}
           {userInfo && userInfo.isAdmin && (
-            <div>
+            <div className="relative z-index">
               <li
-                className="relative flex flex-row items-center cursor-pointer"
+                className=" flex flex-row items-center cursor-pointer"
                 onClick={handleToggleAdmin}
               >
                 Admin <FaCaretDown />
               </li>
               {toggleAdmin && (
-                <ul className="absolute bg-white top-16 right-8 flex flex-col gap-2 shadow-md px-6 py-2">
-                  <li>
+                <ul className="absolute bg-white top-16 flex flex-col gap-2 shadow-md px-6 py-2 w-40">
+                  <li className="w-full">
                     <Link
                       to="/profile"
-                      className="flex flex-row gap-1 items-center"
+                      className="flex flex-row gap-2 items-center"
                       onClick={handleToggleAdmin}
                     >
                       <FaUser />
@@ -114,17 +116,17 @@ const Header = () => {
               )}
             </div>
           )}
-
-          <li>
-            <button
-              onClick={handleLogOut}
-              className="flex flex-row gap-1 items-center text-red-700"
-            >
-              <FaSignOutAlt />
-              Logout
-            </button>
-          </li>
-
+          {userInfo && (
+            <li>
+              <button
+                onClick={handleLogOut}
+                className="flex flex-row gap-1 items-center text-red-700"
+              >
+                <FaSignOutAlt />
+                Logout
+              </button>
+            </li>
+          )}
           {/* register and sign in screens */}
           {!userInfo && (
             <>

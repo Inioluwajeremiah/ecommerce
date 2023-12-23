@@ -13,6 +13,8 @@ const PlaceOrderScreen = () => {
   const cart = useSelector((state) => state.cart);
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
+  console.log("cart => ", cart);
+
   useEffect(() => {
     if (!cart.shippingAddress.address) {
       navigate("/shipping");
@@ -28,10 +30,10 @@ const PlaceOrderScreen = () => {
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
-        itemsPrice: cart.itemPrice,
-        shippingPrice: cart.shippingPrice,
-        taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
+        itemsPrice: Number(cart.itemPrice),
+        shippingPrice: Number(cart.shippingPrice),
+        taxPrice: Number(cart.taxPrice),
+        totalPrice: Number(cart.totalPrice),
       }).unwrap();
       dispatch(clearCartItems());
       navigate(`/orders/${res._id}`);

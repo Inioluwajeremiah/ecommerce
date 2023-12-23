@@ -52,6 +52,7 @@ const ProductDetails = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const AddToCart = () => {
+    console.log("Add to cart at product details =>", itemData);
     dispatch(addToCart({ ...itemData, quantityNeeded }));
     navigate("/cart");
   };

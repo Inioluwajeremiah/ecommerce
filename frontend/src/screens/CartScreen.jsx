@@ -11,6 +11,8 @@ const CartScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  console.log("cart at cartscreen => ", cart);
+
   const CheckOut = () => {
     navigate("/login?redirect=/shipping");
   };
@@ -23,6 +25,7 @@ const CartScreen = () => {
 
   const AddToCart = (itemData, e) => {
     e.preventDefault();
+    console.log("Add to cart at cart screen => ", itemData);
     const quantityNeeded = Number(e.target.value);
     dispatch(addToCart({ ...itemData, quantityNeeded }));
   };

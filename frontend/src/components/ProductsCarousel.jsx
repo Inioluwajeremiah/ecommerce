@@ -48,9 +48,9 @@ const ProductsCarousel = () => {
   ) : error ? (
     <h1>{error?.message || error?.error}</h1>
   ) : (
-    <div className="relative w-full h-[16rem] mb-20 bg-white border overflow-hidden">
+    <div className="relative w-full h-[16rem] mb-20 bg-white border overflow-hidden  ">
       <Meta title={"ShopHub Ng"} />
-      <p className="absolute top-0 left-0 m-4">
+      <p className="absolute top-0 left-0 m-4 ">
         {currentSlide + 1} / {totalSldes}
       </p>
       <div className="max-w-[100%] flex flex-row  ">
@@ -77,7 +77,7 @@ const ProductsCarousel = () => {
 
       <button
         onClick={handlePreviousSlide}
-        className="absolute left-0 top-[50%]"
+        className="absolute left-0 top-[50%] "
       >
         <FaChevronLeft />
       </button>

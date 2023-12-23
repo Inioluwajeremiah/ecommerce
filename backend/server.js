@@ -10,6 +10,11 @@ import uploadRoute from "./routes/uploadRoute.js";
 import { errorHandler, notFound } from "./middleware/errorHandlerMiddleWare.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+// security packages
+import xss from "xss-clean";
+import mongoSanitize from "express-mongo-sanitize";
+import hpp from "hpp";
+import helmet from "helmet";
 
 const port = process.env.PORT || 8000;
 
@@ -26,11 +31,21 @@ app.use(cookieParser());
 
 // app.use(cors());
 
+// security tools
+app.use(xss());
+app.use(hpp());
+app.use(helmet());
+app.use(mongoSanitize());
+
 // routes
 app.use("/v1/api/products", productRoutes); // product route
 app.use("/v1/api/users", userRoutes); //user route
 app.use("/v1/api/orders", orderRoutes); // order route
-
+app.get("/"),
+  (req, res) => {
+    res.send("Api is running locally");
+    // res.sendFile(path.join(__dirname, "public", "index.html"));
+  };
 // upload image routes
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
@@ -54,6 +69,7 @@ if (process.env.NODE_ENV === "production") {
   app.get("/"),
     (req, res) => {
       res.send("Api is running locally");
+      // res.sendFile(path.join(__dirname, "public", "index.html"));
     };
 }
 

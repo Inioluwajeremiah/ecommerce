@@ -9,6 +9,7 @@ import {
   getTopProducts,
 } from "../controllers/productController.js";
 import { protect, admin } from "../middleware/authMiddleWare.js";
+import checkObjectId from "../middleware/checkObjectId.js";
 const router = express.Router();
 
 // get all products
@@ -16,11 +17,11 @@ router.route("/").post(protect, admin, createProduct).get(getProducts);
 router.get("/top", getTopProducts); // get top product
 // get a product
 router
-  .get("/:id", getProduct)
-  .put(protect, admin, updateProduct)
-  .delete(protect, admin, deleteProduct);
+  .get("/:id", checkObjectId, getProduct)
+  .put(protect, admin, checkObjectId, updateProduct)
+  .delete(protect, admin, checkObjectId, deleteProduct);
 
-router.route("/:id/reviews").post(protect, createProductReview);
+router.route("/:id/reviews").post(protect, checkObjectId, createProductReview);
 
 /*
 or you can write comprehensively as 
